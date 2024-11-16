@@ -1,0 +1,32 @@
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <h1 class="text-center text-primary fw-bold">Agregar Materia</h1>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-lg-6 col-md-8 col-sm-12">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4>Formulario de Materia</h4>
+                </div>
+                <div class="card-body bg-light">
+                    <form action="/materias/agregar" method="POST">
+                        <div class="mb-3">
+                            <label for="materia" class="form-label">Nombre de la Materia</label>
+                            <input 
+                                type="text" 
+                                id="materia" 
+                                class="form-control" 
+                                name="materia" 
+                                placeholder="Ejemplo: Matemáticas Avanzadas" 
+                                required 
+                                autofocus />
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

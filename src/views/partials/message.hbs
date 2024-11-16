@@ -1,0 +1,35 @@
+<!-- Mensajes de éxito -->
+{{#if success}}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        Swal.fire({
+            icon: 'success',
+            title: '¡Éxito!',
+            text: '{{success}}',
+            confirmButtonText: 'Aceptar',
+            customClass: {
+                popup: 'shadow-lg rounded',
+                confirmButton: 'btn btn-primary'
+            }
+        });
+    });
+</script>
+{{/if}}
+
+<!-- Mensajes de error -->
+{{#if error}}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        Swal.fire({
+            icon: 'error',
+            title: '¡Error!',
+            text: '{{error}}',
+            confirmButtonText: 'Aceptar',
+            customClass: {
+                popup: 'shadow-lg rounded',
+                confirmButton: 'btn btn-danger'
+            }
+        });
+    });
+</script>
+{{/if}}

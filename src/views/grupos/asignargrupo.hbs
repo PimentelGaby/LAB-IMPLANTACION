@@ -1,0 +1,44 @@
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <h1 class="text-center text-primary fw-bold">Asignar Grupo</h1>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="mb-3">
+                <label for="estudiante" class="form-label">Seleccionar Estudiante</label>
+                <select class="form-select" id="estudiante">
+                    <option value="" disabled selected>Seleccione un estudiante</option>
+                    {{#each lstEstudiantes}}
+                    <option value="{{idestudiante}}">{{nombre}} {{apellido}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <input type="hidden" id="idgrupo" value="{{idgrupo}}" />
+            <div class="d-grid mb-3">
+                <button onclick="agregarEstudiante()" class="btn btn-success">Agregar</button>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12">
+            <form action="/grupos/asignargrupo" method="POST">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">Código</th>
+                                <th scope="col">Estudiante</th>
+                                <th scope="col">Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="contenido_tabla"></tbody>
+                    </table>
+                </div>
+                <input type="hidden" id="data" />
+                <div class="d-grid">
+                    <button class="btn btn-success" id="enviarDatos">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

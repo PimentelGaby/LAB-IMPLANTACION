@@ -1,0 +1,85 @@
+<div class="container my-5">
+    <!-- Encabezado de la página -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h3 class="text-secondary">Listado de Carreras</h3>
+        </div>
+        <div class="col-md-6 text-end">
+            <a href="/carreras/agregar" class="btn btn-success">Agregar Carrera</a>
+        </div>
+    </div>
+
+    <!-- Tabla de carreras -->
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Carrera</th>
+                            <th scope="col">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each carreras}}
+                        <tr>
+                            <td>{{idcarrera}}</td>
+                            <td>{{carrera}}</td>
+                            <td>
+                                <a href="/carreras/modificar/{{idcarrera}}" class="btn btn-sm btn-warning text-white">Modificar</a>
+                                <button class="btn btn-sm btn-danger text-white btn-eliminar" 
+                                        data-id="{{idcarrera}}" 
+                                        data-carrera="{{carrera}}">
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const deleteButtons = document.querySelectorAll(".btn-eliminar");
+
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                const idCarrera = this.dataset.id;
+                const nombreCarrera = this.dataset.carrera;
+
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    html: `
+                        <p>Estás a punto de eliminar la carrera: 
+                        <strong>${nombreCarrera}</strong></p>
+                        <p class="text-danger">Esta acción no se puede deshacer.</p>
+                    `,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Eliminando...',
+                            text: 'Por favor espera.',
+                            allowOutsideClick: false,
+                            didOpen: () => Swal.showLoading()
+                        });
+
+                        setTimeout(() => {
+                            window.location.href = `/carreras/eliminar/${idCarrera}`;
+                        }, 2000);
+                    }
+                });
+            });
+        });
+    });
+</script>

@@ -1,0 +1,53 @@
+<div class="container my-5">
+    <!-- Título -->
+    <div class="row justify-content-center">
+        <h1 class="text-center text-info fw-bold">Modificar Estudiante</h1>
+    </div>
+
+    <!-- Formulario -->
+    <div class="row justify-content-center mt-4">
+        <div class="col-lg-6 col-md-8 col-sm-12">
+            <div class="card shadow-lg">
+                <div class="card-header bg-info text-white text-center">
+                    <h4>Editar Información</h4>
+                </div>
+                <div class="card-body bg-light">
+                    <form action="/estudiantes/modificar/{{estudiante.idestudiante}}" method="POST">
+                        <div class="mb-3">
+                            <label for="idestudiante" class="form-label">Código del Estudiante</label>
+                            <input type="text" id="idestudiante" class="form-control" name="idestudiante" placeholder="Ejemplo: ABC123" value="{{estudiante.idestudiante}}" required autofocus />
+                        </div>
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input type="text" id="nombre" class="form-control" name="nombre" placeholder="Ejemplo: Juan" value="{{estudiante.nombre}}" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="apellido" class="form-label">Apellido</label>
+                            <input type="text" id="apellido" class="form-control" name="apellido" placeholder="Ejemplo: Pérez" value="{{estudiante.apellido}}" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Correo Electrónico</label>
+                            <input type="email" id="email" class="form-control" name="email" placeholder="Ejemplo: juan.perez@email.com" value="{{estudiante.email}}" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="idcarrera" class="form-label">Carrera</label>
+                            <select id="idcarrera" class="form-select" name="idcarrera" required>
+                                <option value="" disabled>Seleccione una carrera</option>
+                                {{#each lstCarreras}}
+                                <option value="{{idcarrera}}" {{#eq idcarrera ../estudiante.idcarrera}}selected{{/eq}}>{{carrera}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="usuario" class="form-label">Usuario</label>
+                            <input type="text" id="usuario" class="form-control" name="usuario" placeholder="Ejemplo: jperez" value="{{estudiante.usuario}}" required />
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-info">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

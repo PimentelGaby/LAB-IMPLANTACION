@@ -1,0 +1,48 @@
+<div class="container p-4">
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-6">
+                <h3>Listado de Profesores</h3>
+            </div>
+            <div class="col-sm-6 text-right">
+                <a href="/profesores/agregar" class="btn btn-success">Agregar Profesor</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 mt-4">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Fecha de Nacimiento</th>
+                    <th scope="col">Profesión</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each profesores}}
+                <tr>
+                    <td>{{nombre}} {{apellido}}</td>
+                    <td>{{formatDate fecha_nacimiento}}</td>
+                    <td>{{profesion}}</td>
+                    <td>{{email}}</td>
+                    <td>
+                        <!-- Botón Modificar con clase de color amarillo -->
+                        <a href="/profesores/modificar/{{idprofesor}}" class="btn btn-warning text-white">
+                            Modificar
+                        </a>
+                        <!-- Botón Eliminar con clase de color rojo -->
+                        <button class="btn btn-danger text-white btn-eliminar" 
+                                data-id="{{idprofesor}}" 
+                                data-nombre="{{nombre}}" 
+                                data-apellido="{{apellido}}">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>

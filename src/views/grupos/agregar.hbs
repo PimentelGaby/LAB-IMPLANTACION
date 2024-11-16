@@ -1,0 +1,51 @@
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <h1 class="text-center text-primary fw-bold">Agregar Grupo</h1>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-lg-6 col-md-8 col-sm-12">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white text-center">
+                    <h4>Formulario de Grupo</h4>
+                </div>
+                <div class="card-body bg-light">
+                    <form action="/grupos/agregar" method="POST">
+                        <div class="mb-3">
+                            <label for="num_grupo" class="form-label">Número de Grupo</label>
+                            <input type="text" class="form-control" id="num_grupo" name="num_grupo" placeholder="Ejemplo: 101" maxlength="3" minlength="1" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="anio" class="form-label">Año</label>
+                            <input type="number" class="form-control" id="anio" name="anio" placeholder="Ejemplo: 2024" min="2000" max="2100" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="ciclo" class="form-label">Ciclo</label>
+                            <input type="number" class="form-control" id="ciclo" name="ciclo" placeholder="Ejemplo: 1" min="1" max="3" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="idmateria" class="form-label">Materia</label>
+                            <select class="form-select" id="idmateria" name="idmateria" required>
+                                <option value="" disabled selected>Seleccione una materia</option>
+                                {{#each lstMaterias}}
+                                <option value="{{idmateria}}">{{materia}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="idprofesor" class="form-label">Profesor</label>
+                            <select class="form-select" id="idprofesor" name="idprofesor" required>
+                                <option value="" disabled selected>Seleccione un profesor</option>
+                                {{#each lstProfesores}}
+                                <option value="{{idprofesor}}">{{nombre}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

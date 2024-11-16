@@ -1,0 +1,78 @@
+<div class="container my-5">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h3 class="text-secondary">Listado de Materias</h3>
+        </div>
+        <div class="col-md-6 text-end">
+            <a href="/materias/agregar" class="btn btn-success">Agregar Materia</a>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Materia</th>
+                    <th scope="col">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each materias}}
+                <tr>
+                    <td>{{idmateria}}</td>
+                    <td>{{materia}}</td>
+                    <td>
+                        <a href="/materias/modificar/{{idmateria}}" class="btn btn-sm btn-warning text-white">Modificar</a>
+                        <button class="btn btn-sm btn-danger text-white btn-eliminar" 
+                                data-id="{{idmateria}}" 
+                                data-materia="{{materia}}">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const deleteButtons = document.querySelectorAll(".btn-eliminar");
+
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                const idMateria = this.dataset.id;
+                const nombreMateria = this.dataset.materia;
+
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    html: `
+                        <p>Estás a punto de eliminar la materia:</p>
+                        <strong>${nombreMateria}</strong>
+                        <p class="text-danger">Esta acción no se puede revertir.</p>
+                    `,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Eliminando...',
+                            text: 'Por favor espera.',
+                            allowOutsideClick: false,
+                            didOpen: () => Swal.showLoading()
+                        });
+
+                        setTimeout(() => {
+                            window.location.href = `/materias/eliminar/${idMateria}`;
+                        }, 2000);
+                    }
+                });
+            });
+        });
+    });
+</script>

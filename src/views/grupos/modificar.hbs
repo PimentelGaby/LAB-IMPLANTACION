@@ -1,0 +1,52 @@
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <h1 class="text-center text-info fw-bold">Modificar Grupo</h1>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-lg-6 col-md-8 col-sm-12">
+            <div class="card shadow-lg">
+                <div class="card-header bg-info text-white text-center">
+                    <h4>Editar Grupo</h4>
+                </div>
+                <div class="card-body bg-light">
+                    <form method="POST" action="/grupos/modificar/{{grupo.idgrupo}}">
+                        <div class="mb-3">
+                            <label for="num_grupo" class="form-label">Número del Grupo</label>
+                            <input type="text" id="num_grupo" class="form-control" name="num_grupo" value="{{grupo.num_grupo}}" placeholder="Ejemplo: 101" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="anio" class="form-label">Año</label>
+                            <input type="number" id="anio" class="form-control" name="anio" value="{{grupo.anio}}" placeholder="Ejemplo: 2024" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="ciclo" class="form-label">Ciclo</label>
+                            <select id="ciclo" class="form-select" name="ciclo" required>
+                                <option value="01" {{#eq grupo.ciclo "01"}}selected{{/eq}}>01</option>
+                                <option value="02" {{#eq grupo.ciclo "02"}}selected{{/eq}}>02</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="idmateria" class="form-label">Materia</label>
+                            <select id="idmateria" class="form-select" name="idmateria" required>
+                                {{#each lstMaterias}}
+                                <option value="{{idmateria}}" {{#eq idmateria ../grupo.idmateria}}selected{{/eq}}>{{materia}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="idprofesor" class="form-label">Profesor</label>
+                            <select id="idprofesor" class="form-select" name="idprofesor" required>
+                                {{#each lstProfesores}}
+                                <option value="{{idprofesor}}" {{#eq idprofesor ../grupo.idprofesor}}selected{{/eq}}>{{nombre}} {{apellido}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-info">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

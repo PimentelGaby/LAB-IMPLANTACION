@@ -1,0 +1,93 @@
+<div class="container my-5">
+    <!-- Título y Botón -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h3 class="text-secondary">Listado de Estudiantes</h3>
+        </div>
+        <div class="col-md-6 text-end">
+            <a href="/estudiantes/agregar" class="btn btn-success">Agregar Estudiante</a>
+        </div>
+    </div>
+
+    <!-- Tabla -->
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Código</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Carrera</th>
+                            <th scope="col">Usuario</th>
+                            <th scope="col">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each estudiantes}}
+                        <tr>
+                            <td>{{idestudiante}}</td>
+                            <td>{{nombre}} {{apellido}}</td>
+                            <td>{{email}}</td>
+                            <td>{{idcarrera}}</td>
+                            <td>{{usuario}}</td>
+                            <td>
+                                <a href="/estudiantes/modificar/{{idestudiante}}" class="btn btn-sm btn-warning text-white">Modificar</a>
+                                <button class="btn btn-sm btn-danger text-white btn-eliminar" 
+                                        data-id="{{idestudiante}}" 
+                                        data-nombre="{{nombre}}" 
+                                        data-apellido="{{apellido}}">
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const deleteButtons = document.querySelectorAll(".btn-eliminar");
+
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                const idEstudiante = this.dataset.id;
+                const nombre = this.dataset.nombre;
+                const apellido = this.dataset.apellido;
+
+                Swal.fire({
+                    title: '¿Estás seguro?',
+                    html: `
+                        <p>Estás a punto de eliminar al estudiante: 
+                        <strong>${nombre} ${apellido}</strong></p>
+                        <p class="text-danger">Esta acción no se puede deshacer.</p>
+                    `,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then(result => {
+                    if (result.isConfirmed) {
+                        Swal.fire({
+                            title: 'Eliminando...',
+                            text: 'Por favor espera.',
+                            allowOutsideClick: false,
+                            didOpen: () => Swal.showLoading()
+                        });
+
+                        setTimeout(() => {
+                            window.location.href = `/estudiantes/eliminar/${idEstudiante}`;
+                        }, 2000);
+                    }
+                });
+            });
+        });
+    });
+</script>
